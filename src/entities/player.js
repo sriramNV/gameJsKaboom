@@ -69,6 +69,15 @@ export function makePlayer(k){
                             return;
                         }
 
+                        if(key === "right" && !this.isAttacking){
+                            if(this.curAnim() !== "run" && this.isGrounded()){
+                                this.play("run");
+                            }   
+                            this.flipX = true;
+                            this.move(this.speed, 0);
+                            return;
+                        }
+
 
                         if(key === "return" && !this.isAttacking){
                             if(this.curAnim() !== "run" && this.isGrounded()){

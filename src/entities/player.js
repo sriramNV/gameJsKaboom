@@ -29,10 +29,10 @@ export function makePlayer(k){
                 this.controlHandlers.push(
                     k.onKeyPress((key)=>{
                         if(key === "x"){
-                            if(this.currAnim() !== "jump") this.play("jump");
+                            if(this.curAnim() !== "jump") this.play("jump");
                             this.doubleJump();
                         }
-                        if(key === "z" && this.currAnim() !== "attack" && this.isGrounded()){
+                        if(key === "z" && this.curAnim() !== "attack" && this.isGrounded()){
                             this.isAttacking = true;
                             this.add([
                                 k.pos(this.flipX? -25 : 0, 10),
@@ -61,7 +61,7 @@ export function makePlayer(k){
                 this.controlHandlers.push(
                     k.onKeyDown((key)=>{
                         if(key === "left" && !this.isAttacking){
-                            if(this.currAnim() !== "run" && this.isGrounded()){
+                            if(this.curAnim() !== "run" && this.isGrounded()){
                                 this.play("run");
                             }   
                             this.flipX = true;
@@ -71,7 +71,7 @@ export function makePlayer(k){
 
 
                         if(key === "return" && !this.isAttacking){
-                            if(this.currAnim() !== "run" && this.isGrounded()){
+                            if(this.curAnim() !== "run" && this.isGrounded()){
                                 this.play("run");
                             }   
                             this.flipX = true;
@@ -83,10 +83,10 @@ export function makePlayer(k){
                 
                 this.controlHandlers.push(
                     k.onKeyRelease(()=>{
-                        if(this.currAnim() !== "idle" &&
-                        this.currAnim() !== "jump" &&
-                        this.currAnim() !== "fall" &&
-                        this.currAnim() !== "attack")
+                        if(this.curAnim() !== "idle" &&
+                        this.curAnim() !== "jump" &&
+                        this.curAnim() !== "fall" &&
+                        this.curAnim() !== "attack")
                             this.play("idle");
                     })
                 );

@@ -1,3 +1,4 @@
+import { makePlayer } from "../entities/player.js";
 import { setBackgroundColor, setMapColliders } from "./roomUtils.js";
 
 export function room1(k, roomData){
@@ -15,12 +16,28 @@ export function room1(k, roomData){
     ]);
 
     const colliders = [];
+    const positions = [];
+
+
     for (const layer of roomLayers ){
+        if(layer.name === "positions"){
+            positions.push(...layer.objects);
+            continue;
+        }
         if (layer.name === "colliders"){
             colliders.push(...layer.objects)
-            break;
+            continue;
         }
     }
     
     setMapColliders(k, map, colliders);
+
+    const player = k.add(makePlayer(k));
+
+    for (const pos of positions){
+        if(pos.name === "player"){
+            player.setPosition(pos.x, pos.y);
+            player.setControls();
+        }
+    }
 }

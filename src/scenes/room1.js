@@ -34,9 +34,9 @@ export function room1(k, roomData){
 
     const player = k.add(makePlayer(k));
 
-    for (const pos of positions){
-        if(pos.name === "player"){
-            player.setPosition(pos.x, pos.y);
+    for (const position of positions){
+        if(position.name === "player"){
+            player.setPosition(position.x, position.y);
             player.setControls();
         }
     }

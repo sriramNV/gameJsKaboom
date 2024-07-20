@@ -50,7 +50,7 @@ export function makePlayer(k){
                                     })[0];
                                 if(swordHitBox)
                                     k.destroy(swordHitBox);
-                                isAttacking = false;
+                                this.isAttacking = false;
                                 this.play("idle");
                                }
                             });

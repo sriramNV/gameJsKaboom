@@ -23,6 +23,13 @@ export function makePlayer(k){
                 this.pos.x = x;
                 this.pos.y = y;
             },
+            enablePassThrough(){
+                this.onBeforePhysicsResolve((collision)=>{
+                    if(collision.target.is("passthrough") && this.isJumping()){
+                        collision.preventResolution();
+                    }
+                });
+            },
             setControls(){
                 this.controlHandlers = [];
                 

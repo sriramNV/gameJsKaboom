@@ -39,6 +39,7 @@ export function room1(k, roomData){
             player.setPosition(position.x, position.y);
             player.setControls();
             player.setEvents();
+            player.enablePassThrough();
         }
     }
 }

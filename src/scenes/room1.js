@@ -38,6 +38,7 @@ export function room1(k, roomData){
         if(position.name === "player"){
             player.setPosition(position.x, position.y);
             player.setControls();
+            player.setEvents();
         }
     }
 }

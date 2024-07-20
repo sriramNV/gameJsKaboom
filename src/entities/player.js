@@ -100,6 +100,21 @@ export function makePlayer(k){
                     })
                 );
             },
+            setEvents(){
+                this.onFall(()=>{
+                    this.play("fall");
+                });
+
+                this.onFallOff(()=>{
+                    this.play("fall");
+                });
+                this.onGround(()=>{
+                    this.play("idle");
+                });
+                this.onHeadbutt(()=>{
+                    this.play("fall");
+                });
+            },
         },
     ]);
 }

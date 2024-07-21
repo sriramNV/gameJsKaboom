@@ -61,7 +61,7 @@ export function setCameraZones(k, map, cameras){
             k.pos(camera.x, camera.y),
         ]);
 
-        camera.onCollide("player",()=>{
+        cameraZone.onCollide("player",()=>{
             if(k.camPos().x !== camera.properties[0].value){
                 k.tween(
                     k.camPos().y,

@@ -1,5 +1,5 @@
 import { makePlayer } from "../entities/player.js";
-import { setBackgroundColor, setMapColliders } from "./roomUtils.js";
+import { setBackgroundColor, setMapColliders, setCameraZones } from "./roomUtils.js";
 
 export function room1(k, roomData){
     setBackgroundColor(k,"#a2aed5");

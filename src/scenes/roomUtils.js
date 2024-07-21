@@ -1,3 +1,5 @@
+import {state} from "../state/globalStageManager.js";
+
 export function setBackgroundColor(k, hexColorCode){
     k.add([
         k.rect(k.width(), k.height()),
@@ -48,7 +50,24 @@ export function setMapColliders(k,map, colliders){
 
 
 export function setCameraControls(k, player, map, roomData){
+    k.onUpdate(()=>{
+        if(state.current().playerInBossFight) return;
 
+        if(map.pos.x +160>player.pos.x){
+            k.camPos(map.pos.x +160, k.camPos().y);
+            return;
+        }
+
+        if(player.pos.x > map.pos.x + roomData.width * roomData.tileWidth - 160){
+            k.camPos(
+                map.pos.x + roomData.width * roomData.tileWidth - 160,
+                k.camPos().y
+            );
+            return;
+        }
+
+        k.camPos(player.pos.x, k.camPos().y);
+    }); 
 }
 
 export function setCameraZones(k, map, cameras){

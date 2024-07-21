@@ -17,10 +17,14 @@ export function room1(k, roomData){
 
     const colliders = [];
     const positions = [];
-    
+    const cameras = [];
 
 
     for (const layer of roomLayers ){
+        if(layer.name === "cameras"){
+            cameras.push(...layer.objects);
+        }
+
         if(layer.name === "positions"){
             positions.push(...layer.objects);
             continue;
@@ -32,6 +36,7 @@ export function room1(k, roomData){
     }
     
     setMapColliders(k, map, colliders);
+    setCameraZones(k,map,cameras);
 
     const player = k.add(makePlayer(k));
 
@@ -43,4 +48,6 @@ export function room1(k, roomData){
             player.enablePassThrough();
         }
     }
+
+
 }

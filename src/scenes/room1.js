@@ -17,6 +17,7 @@ export function room1(k, roomData){
 
     const colliders = [];
     const positions = [];
+    
 
 
     for (const layer of roomLayers ){

@@ -1,5 +1,5 @@
 import { makePlayer } from "../entities/player.js";
-import { setBackgroundColor, setMapColliders, setCameraZones } from "./roomUtils.js";
+import { setBackgroundColor, setMapColliders, setCameraZones, setMapColliders, } from "./roomUtils.js";
 
 export function room1(k, roomData){
     setBackgroundColor(k,"#a2aed5");
@@ -7,6 +7,7 @@ export function room1(k, roomData){
     k.camScale(4);
     k.camPos(170,100);
     k.setGravity(1000);
+    
 
     const roomLayers = roomData.layers;
 
@@ -37,8 +38,11 @@ export function room1(k, roomData){
     
     setMapColliders(k, map, colliders);
     setCameraZones(k,map,cameras);
+    
 
     const player = k.add(makePlayer(k));
+
+    setCameraControls(k,player, map, roomData);
 
     for (const position of positions){
         if(position.name === "player"){

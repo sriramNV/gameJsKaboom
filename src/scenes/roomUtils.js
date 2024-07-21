@@ -23,6 +23,9 @@ export function setMapColliders(k,map, colliders){
                     shape: new k.Polygon(coordinate),
                     collisionIgnore: ["collider"],
                 }),
+                k.body({
+                    isStatic: true
+                }),
                 "collider",
                 collider.type,
             ]);

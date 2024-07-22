@@ -78,7 +78,7 @@ export function makeDrone(k, initialPos){
                     }
 
                     this.flipX = player.pos.x <= this.pos.x;
-                    this.moveTo(k.vec2(player.pos.x, player.pos.y), this.pursuitSpeed);
+                    this.moveTo(k.vec2(player.pos.x, player.pos.y + 12), this.pursuitSpeed);
                 });
             },
             setEvents(){

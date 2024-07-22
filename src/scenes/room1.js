@@ -64,7 +64,7 @@ export function room1(k, roomData) {
 
     if(position.name === "boss" && !state.current().isBossDefeated){
       const boss = map.add(makeBoss(k, k.vec2(position.x, position.y)))
-      boss.setBehaviour();
+      boss.setBehavior();
       boss.setEvents();
     }
   }

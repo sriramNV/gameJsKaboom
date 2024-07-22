@@ -54,11 +54,9 @@ export function room1(k, roomData) {
     }
 
     if(position.type === "drone"){
-        const drone = map.add([
-            makeDrone(k,k.vec2(position.x, position.y)),
-            drone.setBehaviour(),
-            drone.setEvents()
-        ]);
+        const drone = map.add(makeDrone(k,k.vec2(position.x, position.y)));
+            drone.setBehaviour();
+            drone.setEvents();
     }
   }
 }

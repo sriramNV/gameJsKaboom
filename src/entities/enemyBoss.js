@@ -36,9 +36,10 @@ export function makeBoss(k, initialPos){
                 this.onStateUpdate("follow", () => {
                     this.flipX = player.pos.x <= this.pos.x;
                     this.moveTo(
-                        k.vec2(player.pos.x, player.pos.y + 12) ,
-                        this.pursuitSpeed
-                    )
+                      k.vec2(player.pos.x, player.pos.y + 12),
+                      this.pursuitSpeed
+                    );
+          
 
                     if(this.pos.dist(player.pos) < this.fireRange){
                         this.enterState("open-fire");

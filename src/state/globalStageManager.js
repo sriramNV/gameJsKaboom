@@ -1,5 +1,5 @@
 export const statePropsEnum = {
-    platerHp: "playerHp",
+    playerHp: "playerHp",
     isDoubleJumpUnlocked: "isDoubleJumpUnlocked",
     playerInBossFight: "playerInBossFight",
     isBossDefeated: "isBossDefeated",
@@ -8,7 +8,7 @@ export const statePropsEnum = {
 function initStateManager(){
     const state ={
         playerHp: 3,
-        maxPlaterHp: 3,
+        maxPlayerHp: 3,
         isDoubleJumpUnlocked: false,
         playerInBossFight: false,
         isBossDefeated: false,

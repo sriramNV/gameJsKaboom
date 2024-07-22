@@ -1,4 +1,6 @@
-import { statePropsEnum } from "../state/globalStageManager";
+import { statePropsEnum } from "../state/globalStageManager.js";
+import { makeNotificationBox } from "../ui/notificationBox.js";
+import { makeBlink } from "./entitySharedLogic.js";
 
 export function makeBoss(k, initialPos){
     return k.make([
@@ -121,7 +123,13 @@ export function makeBoss(k, initialPos){
                             "You have unlocked the new ability: DOUBLE JUMP."
                         )
                     );
-                    k.wait(3, () => notification.close());
+                    k.wait(3, () => notification.close()); 
+                });
+
+                this.on("hurt", () => {
+                    makeBlink(k, this);
+                    if(this.hp() > 0) return;
+                    this.trigger("explode");
                 });
             },
         }

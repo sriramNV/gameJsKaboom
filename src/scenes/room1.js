@@ -7,6 +7,7 @@ import {
   setCameraZones,
   setCameraControls,
 } from "./roomUtils.js";
+import { state } from "../state/globalStageManager.js";
 
 export function room1(k, roomData) {
   setBackgroundColor(k, "#a2aed5");

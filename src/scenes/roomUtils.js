@@ -87,9 +87,33 @@ export function setMapColliders(k,map, colliders){
                     bossBarrier.deactivate(player.pos.x);
                     return;
                 }
+
+                if(currentState.playerInBossFight) return;
+
+                player.disableControls();
+                player.play("idle");
+                await k.tween(
+                    player.pos.x,
+                    player.pos.x + 25,
+                    0.2,
+                    (val) => (player.pos.x = val),
+                    k.easings.linear
+                );
+                player.setControls();
+            });
+            bossBarrier.onCollideEnd("player", () =>{
+                const currentState = state.current();
+                if(currentState.playerInBossFight || currentState.isBossDefeated) return;
+
+                state.set(statePropsEnum.playerInBossFight, true);
+                bossBarrier.activate();
+                bossBarrier.use(k.body({
+                    isStatic: true
+                }));
             });
             continue;
         }
+
         map.add([
             k.pos(collider.x,collider.y),
             k.area({

@@ -34,9 +34,9 @@ export function makeBoss(k, initialPos){
                 this.onStateEnter("follow", () => this.play("run"));
 
                 this.onStateUpdate("follow", () => {
-                    this.flipX = player.pos.x < this.pos.x;
+                    this.flipX = player.pos.x <= this.pos.x;
                     this.moveTo(
-                        k.vec2(player.pos.x, player.pos.y),
+                        k.vec2(player.pos.x, player.pos.y + 12) ,
                         this.pursuitSpeed
                     )
 

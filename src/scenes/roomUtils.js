@@ -1,4 +1,4 @@
-import {state} from "../state/globalStageManager.js";
+import {state, statePropsEnum} from "../state/globalStageManager.js";
 
 export function setBackgroundColor(k, hexColorCode){
     k.add([
@@ -32,7 +32,62 @@ export function setMapColliders(k,map, colliders){
             continue;
         }
         if(collider.name === "boss-barrier"){
-            // const bossBarrier = map.add([]);
+            const bossBarrier = map.add([
+                k.rect(collider.width, collider.height),
+                k.color(k.Color.fromHex("#eacfba")),
+                k.pos(collider.x, collider.y),
+                k.area({
+                    collisionIgnore: ["collider"],
+                }),
+                k.opacity(0),
+                "boss-barrier",
+                {
+                    activate(){
+                        k.tween(
+                            this.opacity,
+                            0.3,
+                            1,
+                            (val) => (this.opacity = val),
+                            k.easings.linear
+                        );
+
+                        k.tween(
+                            k.camPos().x,
+                            collider.properties[0].value,
+                            1,
+                            (val) => k.camPos(val, k.camPos().y),
+                            k.easings.linear
+                        );
+                    },
+
+                    async deactivate(palyerPosX){
+                        k.tween(
+                            this.opacity,
+                            0,
+                            1,
+                            (val) => (this.opacity = val),
+                            k.easings.linear
+                        );
+
+                        k.tween(
+                            k.camPos().x,
+                            palyerPosX,
+                            1,
+                            (val) => k.camPos(val, k.camPos().y),
+                            k.easings.linear
+                        );
+                        k.destroy(this);
+                    },
+                },                
+            ]);
+            bossBarrier.onCollide("player", async (player) =>{
+                const currentState = state.current();
+                if(currentState.isBossDefeated){
+                    state.set(statePropsEnum.playerInBossFight, false);
+                    bossBarrier.deactivate(player.pos.x);
+                    return;
+                }
+            });
             continue;
         }
         map.add([

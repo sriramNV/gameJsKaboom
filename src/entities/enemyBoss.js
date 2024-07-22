@@ -24,6 +24,7 @@ export function makeBoss(k, initialPos){
             fireRange: 40,
             fireDuration: 1,
             setBehaviour(){
+                const player = k.get("player",{recursive:true});
                 this.onStateUpdate("idle", () => {
                     if(state.current().playerInBossFight){
                         this.enterState("follow");

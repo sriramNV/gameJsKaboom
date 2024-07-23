@@ -7,7 +7,7 @@ import {
   setCameraZones,
   setCameraControls,
 } from "./roomUtils.js";
-import { state } from "../state/globalStageManager.js";
+import { state } from "../state/globalStateManager.js";
 import {makeCartridge} from "../entities/healthCartridges.js";
 import { healthBar } from "../ui/healthBar.js";
 

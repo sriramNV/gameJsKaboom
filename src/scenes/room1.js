@@ -8,6 +8,7 @@ import {
   setCameraControls,
 } from "./roomUtils.js";
 import { state } from "../state/globalStageManager.js";
+import {makeCartridge} from "../entities/healthCartridges.js";
 
 export function room1(k, roomData) {
   setBackgroundColor(k, "#a2aed5");
@@ -66,6 +67,12 @@ export function room1(k, roomData) {
       const boss = map.add(makeBoss(k, k.vec2(position.x, position.y)))
       boss.setBehavior();
       boss.setEvents();
+      continue;
+    }
+
+    if(position.type === "cartridge"){
+      map.add(makeCartridge(k, k.vec2(position.x, position.y))
+      );
     }
   }
 }

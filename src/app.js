@@ -8,12 +8,14 @@ async function main(){
     const room1Data = await (await fetch("./maps/room1.json")).json();
     const room2Data = await (await fetch("./maps/room2.json")).json();
 
-    k.scene("room1", (previousData)=>{
-        room1(k, room1Data);
+
+    
+    k.scene("room1", (previousSceneData)=>{
+        room1(k, room1Data, previousSceneData);
     });
     
-    k.scene("room2", (previousData)=>{
-        room2(k, room2Data);
+    k.scene("room2", (previousSceneData)=>{
+        room2(k, room2Data, previousSceneData);
     });
 }
 
@@ -21,7 +23,7 @@ main();
 
 k.scene("intro", ()=>{
     k.onKeyPress("enter",()=>{
-        k.go("room1")
+        k.go("room1", {exitName: null});
     });
 });
 

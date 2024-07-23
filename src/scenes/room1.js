@@ -6,12 +6,13 @@ import {
   setMapColliders,
   setCameraZones,
   setCameraControls,
+  setExitZones,
 } from "./roomUtils.js";
 import { state } from "../state/globalStateManager.js";
-import {makeCartridge} from "../entities/healthCartridges.js";
+import { makeCartridge } from "../entities/healthCartridges.js";
 import { healthBar } from "../ui/healthBar.js";
 
-export function room1(k, roomData) {
+export function room1(k, roomData, previousSceneData) {
   setBackgroundColor(k, "#a2aed5");
 
   k.camScale(4);
@@ -25,6 +26,7 @@ export function room1(k, roomData) {
   const colliders = [];
   const positions = [];
   const cameras = [];
+  const exits = [];
 
   for (const layer of roomLayers) {
     if (layer.name === "cameras") {
@@ -33,6 +35,10 @@ export function room1(k, roomData) {
 
     if (layer.name === "positions") {
       positions.push(...layer.objects);
+      continue;
+    }
+    if (layer.name === "exits") {
+      exits.push(...layer.objects);
       continue;
     }
     if (layer.name === "colliders") {
@@ -47,33 +53,60 @@ export function room1(k, roomData) {
   const player = k.add(makePlayer(k));
 
   setCameraControls(k, player, map, roomData);
+  setExitZones(k, map, exits, "room2");
 
   for (const position of positions) {
-    if (position.name === "player") {
+    if (position.name === "player" && !previousSceneData.exitName) {
       player.setPosition(position.x, position.y);
       player.setControls();
       player.setEvents();
       player.enablePassThrough();
-      continue; 
+      player.respawnIfOutOfBounds(1000, "room1");
+      continue;
     }
 
-    if(position.type === "drone"){
-        const drone = map.add(makeDrone(k,k.vec2(position.x, position.y)));
-            drone.setBehaviour();
-            drone.setEvents();
-            continue;
+    if (
+      position.name === "entrance-1" &&
+      previousSceneData.exitName === "exit-1"
+    ) {
+      player.setPosition(position.x, position.y);
+      player.setControls();
+      player.setEvents();
+      player.enablePassThrough();
+      player.respawnIfOutOfBounds(1000, "room1");
+      k.camPos(player.pos);
+      continue;
     }
 
-    if(position.name === "boss" && !state.current().isBossDefeated){
-      const boss = map.add(makeBoss(k, k.vec2(position.x, position.y)))
+    if (
+      position.name === "entrance-2" &&
+      previousSceneData.exitName === "exit-2"
+    ) {
+      player.setPosition(position.x, position.y);
+      player.setControls();
+      player.setEvents();
+      player.enablePassThrough();
+      player.respawnIfOutOfBounds(1000, "room1");
+      k.camPos(player.pos);
+      continue;
+    }
+
+    if (position.type === "drone") {
+      const drone = map.add(makeDrone(k, k.vec2(position.x, position.y)));
+      drone.setBehaviour();
+      drone.setEvents();
+      continue;
+    }
+
+    if (position.name === "boss" && !state.current().isBossDefeated) {
+      const boss = map.add(makeBoss(k, k.vec2(position.x, position.y)));
       boss.setBehavior();
       boss.setEvents();
       continue;
     }
 
-    if(position.type === "cartridge"){
-      map.add(makeCartridge(k, k.vec2(position.x, position.y))
-      );
+    if (position.type === "cartridge") {
+      map.add(makeCartridge(k, k.vec2(position.x, position.y)));
     }
   }
 

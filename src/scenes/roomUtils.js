@@ -176,7 +176,7 @@ export function setCameraZones(k, map, cameras) {
   }
 }
 
-export function setExitZones(k, map, exits, destName) {
+export function setExitZones(k, map, exits, destinationName) {
   for (const exit of exits) {
     const exitZone = map.add([
       k.pos(exit.x, exit.y),

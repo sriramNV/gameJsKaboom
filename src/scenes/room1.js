@@ -9,6 +9,7 @@ import {
 } from "./roomUtils.js";
 import { state } from "../state/globalStageManager.js";
 import {makeCartridge} from "../entities/healthCartridges.js";
+import { healthBar } from "../ui/healthBar.js";
 
 export function room1(k, roomData) {
   setBackgroundColor(k, "#a2aed5");
@@ -75,4 +76,8 @@ export function room1(k, roomData) {
       );
     }
   }
+
+  healthBar.setEvents();
+  healthBar.trigger("update");
+  k.add(healthBar);
 }

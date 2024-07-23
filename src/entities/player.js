@@ -1,4 +1,5 @@
 import { state, statePropsEnum } from "../state/globalStageManager.js";
+import { healthBar } from "../ui/healthBar.js";
 import { makeBlink } from "./entitySharedLogic.js";
 
 export function makePlayer(k){
@@ -133,13 +134,14 @@ export function makePlayer(k){
 
                 this.on("heal", ()=>{
                     state.set(statePropsEnum.playerHp, this.hp());
-                    // health bar logic
+                    healthBar.trigger("update");
                 });
 
                 this.on("hurt", () => {
                     makeBlink(k, this);
                     if(this.hp>0){
                         state.set(statePropsEnum.playerHp, this.hp());
+                        healthBar.trigger("update");
                         return;
                         // 
                     }

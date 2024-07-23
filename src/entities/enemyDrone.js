@@ -2,16 +2,10 @@ export function makeDrone(k, initialPos) {
   return k.make([
     k.pos(initialPos),
     k.sprite("drone", { anim: "flying" }),
-    k.area({
-      shape: new k.Rect(k.vec2(0), 12, 12),
-    }),
+    k.area({ shape: new k.Rect(k.vec2(0), 12, 12) }),
     k.anchor("center"),
-    k.body({
-      gravityScale: 0,
-    }),
-    k.offscreen({
-      distance: 400,
-    }),
+    k.body({ gravityScale: 0 }),
+    k.offscreen({ distance: 400 }),
     k.state("patrol-right", [
       "patrol-right",
       "patrol-left",
@@ -26,9 +20,7 @@ export function makeDrone(k, initialPos) {
       pursuitSpeed: 150,
       range: 100,
       setBehavior() {
-        const player = k.get("player", {
-          recursive: true,
-        })[0];
+        const player = k.get("player", { recursive: true })[0];
 
         this.onStateEnter("patrol-right", async () => {
           await k.wait(3);
@@ -40,7 +32,6 @@ export function makeDrone(k, initialPos) {
             this.enterState("alert");
             return;
           }
-
           this.flipX = false;
           this.move(this.speed, 0);
         });
@@ -55,7 +46,6 @@ export function makeDrone(k, initialPos) {
             this.enterState("alert");
             return;
           }
-
           this.flipX = true;
           this.move(-this.speed, 0);
         });
@@ -83,6 +73,7 @@ export function makeDrone(k, initialPos) {
           );
         });
       },
+
       setEvents() {
         const player = k.get("player", { recursive: true })[0];
 
@@ -109,6 +100,8 @@ export function makeDrone(k, initialPos) {
           this.hurt(1);
         });
 
+        // event defined by default by the health component
+        // when health is removed
         this.on("hurt", () => {
           if (this.hp() === 0) {
             this.trigger("explode");
@@ -116,7 +109,7 @@ export function makeDrone(k, initialPos) {
         });
 
         this.onExitScreen(() => {
-          this.pos = initialPos;
+          if (this.pos.dist(initialPos) > 400) this.pos = initialPos;
         });
       },
     },

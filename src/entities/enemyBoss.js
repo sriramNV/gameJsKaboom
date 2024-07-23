@@ -1,26 +1,26 @@
-import { statePropsEnum, state } from "../state/globalStateManager.js";
-import { makeNotificationBox } from "../ui/notificationBox.js";
+import { state, statePropsEnum } from "../state/globalStateManager.js";
 import { makeBlink } from "./entitySharedLogic.js";
+import { makeNotificationBox } from "../ui/notificationBox.js";
 
-export function makeBoss(k, initialPos){
-    return k.make([
-        k.pos(initialPos),
-        k.sprite("burner",{anim:"idle"}),
-        k.area({shape: new k.Rect(k.vec2(0,10),12,12)}),
-        k.anchor("center"),
-        k.body({mass: 100, jumpForce: 320}),       
-        k.state("idle",[
-            "idle",
-            "follow",
-            "open-fire",
-            "fire",
-            "shut-fire",
-            "explode", 
-        ]),
-        k.health(15),
-        k.opacity(1),
-        {
-            pursuitSpeed: 100,
+export function makeBoss(k, initialPos) {
+  return k.make([
+    k.pos(initialPos),
+    k.sprite("burner", { anim: "idle" }),
+    k.area({ shape: new k.Rect(k.vec2(0, 10), 12, 12) }),
+    k.body({ mass: 100, jumpForce: 320 }),
+    k.anchor("center"),
+    k.state("idle", [
+      "idle",
+      "follow",
+      "open-fire",
+      "fire",
+      "shut-fire",
+      "explode",
+    ]),
+    k.health(15),
+    k.opacity(1),
+    {
+      pursuitSpeed: 100,
       fireRange: 40,
       fireDuration: 1,
       setBehavior() {

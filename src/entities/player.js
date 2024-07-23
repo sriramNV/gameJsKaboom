@@ -20,13 +20,13 @@ export function makePlayer(k) {
         this.pos.x = x;
         this.pos.y = y;
       },
-      enablePassthrough() {
-        this.onBeforePhysicsResolve((collision) => {
-          if (collision.target.is("passthrough") && this.isJumping()) {
-            collision.preventResolution();
-          }
-        });
-      },
+    //   enablePassthrough() {
+    //     this.onBeforePhysicsResolve((collision) => {
+    //       if (collision.target.is("passthrough") && this.isJumping()) {
+    //         collision.preventResolution();
+    //       }
+    //     });
+    //   },
       setControls() {
         this.controlHandlers = [];
 

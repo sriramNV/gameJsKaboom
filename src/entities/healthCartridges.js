@@ -1,3 +1,5 @@
+import { state } from "../state/globalStageManager";
+
 export function makeCartridge(k, pos){
     const cartridge = k.make([
         k.sprite("cartridge", {anim: "default"}),

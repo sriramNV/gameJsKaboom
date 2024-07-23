@@ -1,4 +1,4 @@
-import { state } from "../state/globalStageManager";
+import { state } from "../state/globalStageManager.js";
 import {k} from "../kaboomLoader.js"
 
 function makeHealthBar(k){

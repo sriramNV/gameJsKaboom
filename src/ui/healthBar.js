@@ -3,7 +3,7 @@ import {k} from "../kaboomLoader.js"
 
 function makeHealthBar(k){
     return k.make([
-        k.sprite("helthBar",{frame: 0}),
+        k.sprite("healthBar",{frame: 0}),
         k.fixed(),
         k.pos(10,10),
         k.scale(4),

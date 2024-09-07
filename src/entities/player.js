@@ -84,7 +84,7 @@ export function makePlayer(k) {
               return;
             }
           }),
-          k.mouseDown((key)=>{
+          k.onMouseDown((key)=>{
             if (key === "left" && !this.isAttacking) {
               if (this.curAnim() !== "run" && this.isGrounded()) {
                 this.play("run");

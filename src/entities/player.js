@@ -65,25 +65,25 @@ export function makePlayer(k) {
         );
 
         this.controlHandlers.push(
-          k.onKeyDown((key) => {
-            if (key === "left" && !this.isAttacking) {
-              if (this.curAnim() !== "run" && this.isGrounded()) {
-                this.play("run");
-              }
-              this.flipX = true;
-              this.move(-this.speed, 0);
-              return;
-            }
+          // k.onKeyDown((key) => {
+          //   if (key === "left" && !this.isAttacking) {
+          //     if (this.curAnim() !== "run" && this.isGrounded()) {
+          //       this.play("run");
+          //     }
+          //     this.flipX = true;
+          //     this.move(-this.speed, 0);
+          //     return;
+          //   }
 
-            if (key === "right" && !this.isAttacking) {
-              if (this.curAnim() !== "run" && this.isGrounded()) {
-                this.play("run");
-              }
-              this.flipX = false;
-              this.move(this.speed, 0);
-              return;
-            }
-          }),
+          //   if (key === "right" && !this.isAttacking) {
+          //     if (this.curAnim() !== "run" && this.isGrounded()) {
+          //       this.play("run");
+          //     }
+          //     this.flipX = false;
+          //     this.move(this.speed, 0);
+          //     return;
+          //   }
+          // }),
           k.onMouseDown((key)=>{
             if (key === "left" && !this.isAttacking) {
               if (this.curAnim() !== "run" && this.isGrounded()) {
